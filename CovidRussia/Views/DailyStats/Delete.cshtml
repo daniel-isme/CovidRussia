@@ -1,0 +1,52 @@
+﻿@model CovidRussia.Models.DailyStat
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>DailyStat</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Region)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Region.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NewCases)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NewCases)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NewDeaths)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NewDeaths)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NewRecovered)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NewRecovered)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="RegionId" />
+        <input type="hidden" asp-for="StatsId" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
