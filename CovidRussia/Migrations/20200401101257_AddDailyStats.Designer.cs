@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CovidRussia.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200331204524_AddDailyStats")]
+    [Migration("20200401101257_AddDailyStats")]
     partial class AddDailyStats
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,9 +23,9 @@ namespace CovidRussia.Migrations
 
             modelBuilder.Entity("CovidRussia.Models.DailyStat", b =>
                 {
-                    b.Property<int>("RegionId");
-
-                    b.Property<int>("StatsId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("Date");
 
@@ -35,7 +35,11 @@ namespace CovidRussia.Migrations
 
                     b.Property<int>("NewRecovered");
 
-                    b.HasKey("RegionId", "StatsId");
+                    b.Property<int>("RegionId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RegionId");
 
                     b.ToTable("DailyStats");
                 });

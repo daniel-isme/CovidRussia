@@ -1,4 +1,4 @@
-﻿@model CovidRussia.Models.DailyStat
+﻿@model CovidRussia.Models.ViewModels.DailyStatCreateModel
 
 @{
     ViewData["Title"] = "Create";
@@ -10,17 +10,8 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" asp-route-regionId="@ViewBag.Region.Id">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="RegionId" class="control-label"></label>
-                <select asp-for="RegionId" class ="form-control" asp-items="ViewBag.RegionId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="StatsId" class="control-label"></label>
-                <input asp-for="StatsId" class="form-control" />
-                <span asp-validation-for="StatsId" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="Date" class="control-label"></label>
                 <input asp-for="Date" class="form-control" />

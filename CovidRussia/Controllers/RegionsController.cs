@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CovidRussia.Data;
 using CovidRussia.Models;
+using CovidRussia.Models.ViewModels;
 
 namespace CovidRussia.Controllers
 {
@@ -46,7 +47,7 @@ namespace CovidRussia.Controllers
         // GET: Regions/Create
         public IActionResult Create()
         {
-            return View();
+            return View(new RegionCreateModel());
         }
 
         // POST: Regions/Create
@@ -54,15 +55,22 @@ namespace CovidRussia.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,IsLockedDown")] Region region)
+        public async Task<IActionResult> Create(RegionCreateModel model)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                _context.Add(region);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var region = new Region
+                {
+                    Name = model.Name,
+                    IsLockedDown = model.IsLockedDown,
+                };
+
+                this._context.Regions.Add(region);
+                await this._context.SaveChangesAsync();
+                return this.RedirectToAction("Index");
             }
-            return View(region);
+
+            return this.View(model);
         }
 
         // GET: Regions/Edit/5
@@ -74,11 +82,19 @@ namespace CovidRussia.Controllers
             }
 
             var region = await _context.Regions.FindAsync(id);
+
             if (region == null)
             {
                 return NotFound();
             }
-            return View(region);
+
+            var model = new RegionEditModel
+            {
+                Name = region.Name,
+                IsLockedDown = region.IsLockedDown
+            };
+
+            return View(model);
         }
 
         // POST: Regions/Edit/5
@@ -86,34 +102,30 @@ namespace CovidRussia.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,IsLockedDown")] Region region)
+        public async Task<IActionResult> Edit(int? id, RegionEditModel model)
         {
-            if (id != region.Id)
+            if (id == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            if (ModelState.IsValid)
+            var region = await this._context.Regions
+                .SingleOrDefaultAsync(m => m.Id == id);
+            if (region == null)
             {
-                try
-                {
-                    _context.Update(region);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!RegionExists(region.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                return this.NotFound();
             }
-            return View(region);
+
+            if (this.ModelState.IsValid)
+            {
+                region.Name = model.Name;
+                region.IsLockedDown = model.IsLockedDown;
+
+                await this._context.SaveChangesAsync();
+                return this.RedirectToAction("Index");
+            }
+
+            return this.View(model);
         }
 
         // GET: Regions/Delete/5

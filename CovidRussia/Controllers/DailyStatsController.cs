@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CovidRussia.Data;
 using CovidRussia.Models;
+using CovidRussia.Models.ViewModels;
 
 namespace CovidRussia.Controllers
 {
@@ -20,10 +21,31 @@ namespace CovidRussia.Controllers
         }
 
         // GET: DailyStats
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(Int32? regionId)
         {
-            var applicationDbContext = _context.DailyStats.Include(d => d.Region);
-            return View(await applicationDbContext.ToListAsync());
+            if (regionId == null)
+            {
+                return this.NotFound();
+            }
+
+            var region = await this._context.Regions
+                .SingleOrDefaultAsync(x => x.Id == regionId);
+
+            if (region == null)
+            {
+                return this.NotFound();
+            }
+
+            this.ViewBag.Region = region;
+            var stats = await this._context.DailyStats
+                .Include(w => w.Region)
+                .Where(x => x.RegionId == regionId)
+                .ToListAsync();
+
+            return this.View(stats);
+
+            //var applicationDbContext = _context.DailyStats.Include(d => d.Region);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: DailyStats/Details/5
@@ -36,7 +58,7 @@ namespace CovidRussia.Controllers
 
             var dailyStat = await _context.DailyStats
                 .Include(d => d.Region)
-                .FirstOrDefaultAsync(m => m.RegionId == id);
+                .SingleOrDefaultAsync(m => m.RegionId == id);
             if (dailyStat == null)
             {
                 return NotFound();
@@ -46,10 +68,23 @@ namespace CovidRussia.Controllers
         }
 
         // GET: DailyStats/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create(Int32? regionId)
         {
-            ViewData["RegionId"] = new SelectList(_context.Regions, "Id", "Name");
-            return View();
+            if (regionId == null)
+            {
+                return this.NotFound();
+            }
+
+            var region = await this._context.Regions
+                .SingleOrDefaultAsync(x => x.Id == regionId);
+
+            if (region == null)
+            {
+                return this.NotFound();
+            }
+
+            this.ViewBag.Region = region;
+            return this.View(new DailyStatCreateModel());
         }
 
         // POST: DailyStats/Create
@@ -57,16 +92,40 @@ namespace CovidRussia.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RegionId,StatsId,Date,NewCases,NewDeaths,NewRecovered")] DailyStat dailyStat)
+        public async Task<IActionResult> Create(Int32? regionId, DailyStatCreateModel model)
         {
-            if (ModelState.IsValid)
+            if (regionId == null)
             {
-                _context.Add(dailyStat);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return this.NotFound();
             }
-            ViewData["RegionId"] = new SelectList(_context.Regions, "Id", "Name", dailyStat.RegionId);
-            return View(dailyStat);
+
+            var region = await this._context.Regions
+                .SingleOrDefaultAsync(x => x.Id == regionId);
+
+            if (region == null)
+            {
+                return this.NotFound();
+            }
+            
+            if (this.ModelState.IsValid)
+            {
+                var stat = new DailyStat
+                {
+                    RegionId = region.Id,
+                    Date = model.Date,
+                    NewCases = model.NewCases,
+                    NewDeaths = model.NewDeaths,
+                    NewRecovered = model.NewRecovered,
+                };
+
+                this._context.Add(stat);
+                await this._context.SaveChangesAsync();
+                return this.RedirectToAction("Index", new { regionId = region.Id });
+            }
+
+            this.ViewBag.Region = region;
+            return this.View(model);
+
         }
 
         // GET: DailyStats/Edit/5
@@ -74,16 +133,26 @@ namespace CovidRussia.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            var dailyStat = await _context.DailyStats.FindAsync(id);
-            if (dailyStat == null)
+            var stat = await this._context.DailyStats
+                .SingleOrDefaultAsync(m => m.Id == id);
+            if (stat == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
-            ViewData["RegionId"] = new SelectList(_context.Regions, "Id", "Name", dailyStat.RegionId);
-            return View(dailyStat);
+
+            var model = new DailyStatEditModel
+            {
+                Date = stat.Date,
+                NewCases = stat.NewCases,
+                NewDeaths = stat.NewDeaths,
+                NewRecovered = stat.NewRecovered
+            };
+
+            return this.View(model);
+
         }
 
         // POST: DailyStats/Edit/5
@@ -91,35 +160,33 @@ namespace CovidRussia.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RegionId,StatsId,Date,NewCases,NewDeaths,NewRecovered")] DailyStat dailyStat)
+        public async Task<IActionResult> Edit(int? id, DailyStatEditModel model)
         {
-            if (id != dailyStat.RegionId)
+            if (id == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            if (ModelState.IsValid)
+            var stat = await this._context.DailyStats
+                .SingleOrDefaultAsync(m => m.Id == id);
+            if (stat == null)
             {
-                try
-                {
-                    _context.Update(dailyStat);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!DailyStatExists(dailyStat.RegionId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                return this.NotFound();
             }
-            ViewData["RegionId"] = new SelectList(_context.Regions, "Id", "Name", dailyStat.RegionId);
-            return View(dailyStat);
+
+            if (this.ModelState.IsValid)
+            {
+                stat.Date = model.Date;
+                stat.NewCases = model.NewCases;
+                stat.NewDeaths = model.NewDeaths;
+                stat.NewRecovered = model.NewRecovered;
+
+                await this._context.SaveChangesAsync();
+                return this.RedirectToAction("Index", new { regionId = stat.RegionId });
+            }
+
+            return this.View(model);
+
         }
 
         // GET: DailyStats/Delete/5
@@ -149,7 +216,7 @@ namespace CovidRussia.Controllers
             var dailyStat = await _context.DailyStats.FindAsync(id);
             _context.DailyStats.Remove(dailyStat);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { regionId = dailyStat.RegionId });
         }
 
         private bool DailyStatExists(int id)

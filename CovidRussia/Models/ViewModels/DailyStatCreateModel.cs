@@ -3,16 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CovidRussia.Models
+namespace CovidRussia.Models.ViewModels
 {
-    public class DailyStat
+    public class DailyStatCreateModel
     {
-        public Int32 RegionId { get; set; }
-
-        public Region Region { get; set; }
-
-        public Int32 Id { get; set; }
-
         public DateTime Date { get; set; }
 
         public Int32 NewCases { get; set; }

@@ -21,9 +21,7 @@ namespace CovidRussia.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<DailyStat>()
-                .HasKey(x => new { x.RegionId, x.StatsId });
+            
         }
     }
 }
