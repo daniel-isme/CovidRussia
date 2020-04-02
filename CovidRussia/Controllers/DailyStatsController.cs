@@ -56,9 +56,8 @@ namespace CovidRussia.Controllers
                 return NotFound();
             }
 
-            var dailyStat = await _context.DailyStats
-                .Include(d => d.Region)
-                .SingleOrDefaultAsync(m => m.RegionId == id);
+            var dailyStat = await this._context.DailyStats
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (dailyStat == null)
             {
                 return NotFound();
@@ -167,22 +166,22 @@ namespace CovidRussia.Controllers
                 return this.NotFound();
             }
 
-            var stat = await this._context.DailyStats
+            var dailyStat = await this._context.DailyStats
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (stat == null)
+            if (dailyStat == null)
             {
                 return this.NotFound();
             }
 
             if (this.ModelState.IsValid)
             {
-                stat.Date = model.Date;
-                stat.NewCases = model.NewCases;
-                stat.NewDeaths = model.NewDeaths;
-                stat.NewRecovered = model.NewRecovered;
+                dailyStat.Date = model.Date;
+                dailyStat.NewCases = model.NewCases;
+                dailyStat.NewDeaths = model.NewDeaths;
+                dailyStat.NewRecovered = model.NewRecovered;
 
                 await this._context.SaveChangesAsync();
-                return this.RedirectToAction("Index", new { regionId = stat.RegionId });
+                return this.RedirectToAction("Index", new { regionId = dailyStat.RegionId });
             }
 
             return this.View(model);
@@ -197,9 +196,8 @@ namespace CovidRussia.Controllers
                 return NotFound();
             }
 
-            var dailyStat = await _context.DailyStats
-                .Include(d => d.Region)
-                .FirstOrDefaultAsync(m => m.RegionId == id);
+            var dailyStat = await this._context.DailyStats
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (dailyStat == null)
             {
                 return NotFound();
