@@ -5,33 +5,59 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CovidRussia.Models;
+using CovidRussia.Data;
+using System.IO;
 
 namespace CovidRussia.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ApplicationDbContext _context;
+
+        public HomeController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult About()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Index(StartPageAction action)
         {
-            ViewData["Message"] = "Your application description page.";
+            switch (action)
+            {
+                case StartPageAction.Submit:
 
-            return View();
+                    //fillRegionsFromFile();
+                    
+                    return this.View("Success");
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(action), action, null);
+            }
         }
 
-        public IActionResult Contact()
+        private void fillRegionsFromFile()
         {
-            ViewData["Message"] = "Your contact page.";
+            string readPath = @"C:\Users\danii\Desktop\CovidRussia\data\all_regions_list.txt";
+            string line;
 
-            return View();
-        }
+            StreamReader sr = new StreamReader(readPath, System.Text.Encoding.Default);
+            while ((line = sr.ReadLine()) != null) // reading one line
+            {
+                var region = new Region
+                {
+                    Name = line,
+                    IsLockedDown = false,
+                };
 
-        public IActionResult Privacy()
-        {
-            return View();
+                _context.Regions.Add(region);
+            }
+
+            _context.SaveChanges();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
