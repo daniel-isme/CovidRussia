@@ -44,9 +44,7 @@ namespace CovidRussia.Migrations
 
             modelBuilder.Entity("CovidRussia.Models.Region", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("Id");
 
                     b.Property<bool>("IsLockedDown");
 

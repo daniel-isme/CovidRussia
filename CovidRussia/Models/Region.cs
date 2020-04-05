@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,6 +9,7 @@ namespace CovidRussia.Models
 {
     public class Region
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Int32 Id { get; set; }
 
         [Required]

@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200331201644_AddRegions.cs" />
+    <Compile Remove="Migrations\20200331201644_AddRegions.Designer.cs" />
+    <Compile Remove="Migrations\20200401101257_AddDailyStats.cs" />
+    <Compile Remove="Migrations\20200401101257_AddDailyStats.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
