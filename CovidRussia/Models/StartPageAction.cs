@@ -8,6 +8,7 @@ namespace CovidRussia.Models
     public enum StartPageAction
     {
         Init,
-        Update
+        Update,
+        Map
     }
 }

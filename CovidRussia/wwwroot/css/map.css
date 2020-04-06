@@ -1,0 +1,84 @@
+.cont {
+    background-color: #A0A0A0;
+    position: absolute;
+    overflow: hidden;
+    outline: 3px solid black;
+    height: 40%;
+    width: 40%;
+    left: 50%;
+    top: 25%;
+    transform: translate(-50%, -50%);
+}
+
+.cont #map {
+    /*background-color: #2196F3;*/
+    cursor: grab;
+    display: block;
+    position: inherit;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    transition: .1s;
+}
+
+#map path {
+    position: inherit;
+    fill: #333333;
+    stroke: green;
+    stroke-width: .3px;
+}
+
+
+#map path:hover {
+    fill: green;
+    transform: translate(-3.4%, -2%) scale(1.02);
+}
+
+#zoomMinus {
+    z-index: 9999999;
+    outline: none;
+    background-color: #A0A0A0;
+    font-size: 130%;
+    font-weight: bolder;
+    position: inherit;
+    right: -4%;
+    top: 50%;
+    height: 35px;
+    width: 35px;
+    border: 1px;
+    border-radius: 5px;
+}
+
+#zoomMinus:active {
+    background-color: dimgrey;
+    height: 37px;
+    width: 37px;
+    right: -4.1%;
+    top: 49.9%;
+}
+
+
+#zoomPlus {
+    outline: none;
+    background-color: #A0A0A0;
+    font-size: 110%;
+    font-weight: bolder;
+    position: absolute;
+    right: -4%;
+    top: 40%;
+    height: 35px;
+    width: 35px;
+    border: 1px;
+    border-radius: 5px;
+}
+
+#zoomPlus:active {
+    background-color: dimgrey;
+    height: 37px;
+    width: 37px;
+    right: -4.1%;
+    top: 39.9%  ;
+}

@@ -37,6 +37,11 @@ namespace CovidRussia.Controllers
                     initData();
                     return this.View("Success");
 
+
+                case StartPageAction.Map:
+                    
+                    return this.View("index_new");
+
                 case StartPageAction.Update:
 
                     Cleaner.ClearRawText(
