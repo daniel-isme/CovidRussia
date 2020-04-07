@@ -1,19 +1,58 @@
-$(document).ready(function(){               //get ID
-    $('path').click(function() {
-        let clickId = $(this).attr('id');
-        console.log(clickId)
+let casesArr = [];
+let deathsArr = [];
+let recoveredArr = [];
+let regions;
+let labels = [];
+let regionName = "";
+
+$(document).ready(function () {               //get ID
+    $('path').click(function () {
+        getRegionStats($(this).attr('id'));
+        updateData();
     });
 });
+// document.getElementById().addEventListener("click", function () {
+//     // addData(newData1);
+//     // addData(newData2);
+//     // addData(newData3);
+// });
 
-
-
-
-function randomInteger(min, max) { // function fill array
-    let rand = min - 0.5 + Math.random() * (max - min + 1);
-    return Math.round(rand);
+function receiveJsonData(regs) {
+    regions = regs;
 }
 
-let chartColors = { //obj colors
+function getRegionStats(id) {
+    casesArr = [];
+    deathsArr = [];
+    recoveredArr = [];
+    labels = [];
+    for (var i = 0; i < regions.length; i++) {
+        if (regions[i].Id == id) {
+            regionName = regions[i].Name;
+            for (var j = 0; j < regions[i].DailyStats.length; j++) {
+                casesArr.push(regions[i].DailyStats[j].NewCases);
+                deathsArr.push(regions[i].DailyStats[j].NewDeaths);
+                recoveredArr.push(regions[i].DailyStats[j].NewRecovered);
+                labels.push(regions[i].DailyStats[j].Date);
+            }
+        }
+    }
+    console.log(id);
+    console.log(casesArr);
+}
+
+
+function updateData() {
+    chart.data.labels = labels;
+    chart.options.title.text = regionName;
+    chart.data.datasets[0].data = casesArr;
+    chart.data.datasets[1].data = deathsArr;
+    chart.data.datasets[2].data = recoveredArr;
+    chart.update();
+}
+
+
+let chartColors = {
     white: 'rgb(255,255,255)',
     grey: 'rgb(180,180,180)',
     yellow: 'rgb(255,252,1)',
@@ -28,80 +67,31 @@ let chartColors = { //obj colors
 
 let ctx = document.getElementById('myChart').getContext('2d');
 
-let lengthAr = 12;
-let array = new Array(lengthAr);
-
-
-let label = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-let infected = {
-    label: 'Infected',
+let cases = {
+    label: 'Cases',
     borderColor: chartColors.red,
     pointBackgroundColor: chartColors.red,
     pointBorderWidth: 5,
-    data: [],
+    data: casesArr,
 };
 let recovered = {
     label: 'Recovered',
     borderColor: chartColors.green,
     pointBackgroundColor: chartColors.green,
     pointBorderWidth: 5,
-    data: [],
+    data: recoveredArr,
 };
-let died = {
-    label: 'Died',
+let deaths = {
+    label: 'Deaths',
     borderColor: chartColors.darkmagenta,
     pointBackgroundColor: chartColors.darkmagenta,
     pointBorderWidth: 5,
-    data: [],
+    data: deathsArr,
 };
 let addCanvas = {
-    labels: label,
-    datasets: [infected, recovered, died]
+    labels: labels,
+    datasets: [cases, recovered, deaths]
 };
-
-function fillArray(array) {
-    if (array[0] === 'Infected') {
-        for (let i = 1; i < lengthAr + 1; i++) {
-            array[i] = randomInteger(5, 20);
-        }
-    }
-    if (array[0] === 'Recovered') {
-        for (let i = 1; i < lengthAr + 1; i++) {
-            array[i] = randomInteger(2, 10);
-        }
-    }
-    if (array[0] === 'Died') {
-        for (let i = 1; i < lengthAr + 1; i++) {
-            array[i] = randomInteger(1, 5);
-        }
-    }
-}
-
-array.unshift("Infected");
-fillArray(array);
-addData(array);
-array.unshift("Recovered");
-fillArray(array);
-addData(array);
-array.unshift("Died");
-fillArray(array);
-addData(array);
-
-function addData(data) {
-    if (data[0] === 'Infected') {
-        data.splice(0, 1);
-        data.forEach(elem => infected.data.push(elem));
-    }
-    if (data[0] === 'Recovered') {
-        data.splice(0, 1);
-        data.forEach(elem => recovered.data.push(elem));
-    }
-    if (data[0] === 'Died') {
-        data.splice(0, 1);
-        data.forEach(elem => died.data.push(elem));
-    }
-}
 
 let chart = new Chart(ctx, {
     type: 'line',
@@ -167,5 +157,3 @@ let chart = new Chart(ctx, {
         }
     }
 });
-
-

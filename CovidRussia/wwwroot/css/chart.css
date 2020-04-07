@@ -4,7 +4,7 @@
     height: 50%;
     width: 100%;
     left: 50%;
-    top: 70%;
+    top: 100%;
     transform: translate(-50%, -50%);
 }
 
@@ -13,4 +13,4 @@
     display: block;
     height: 100%;
     width: 100%;
-}
+}   
