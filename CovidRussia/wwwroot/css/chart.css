@@ -1,16 +1,17 @@
 .chart {
     position: absolute;
     /*outline: 3px solid black;*/
-    height: 50%;
+    height: 500px;
     width: 100%;
-    left: 50%;
-    top: 100%;
-    transform: translate(-50%, -50%);
+    left: 0;
+    right: 0;
+    top: 800px;
+    /*transform: translate(-50%, -50%);*/
 }
 
-.chart#myChart {
-    position: inherit;
-    display: block;
-    height: 100%;
-    width: 100%;
-}   
+    .chart#myChart {
+        position: inherit;
+        display: block;
+        height: 100%;
+        width: 100%;
+    }
