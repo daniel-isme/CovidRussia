@@ -1,6 +1,9 @@
 let casesArr = [];
 let deathsArr = [];
 let recoveredArr = [];
+let casesArrSum = [];
+let deathsArrSum = [];
+let recoveredArrSum = [];
 let regions;
 let dates = [];
 let regionName = "";
@@ -34,8 +37,21 @@ function getRegionStats(id) {
             }
         }
     }
+    sumStats();
 }
 
+function sumStats() {
+    casesArrSum = casesArr;
+    deathsArrSum = deathsArr;
+    recoveredArrSum = recoveredArr;
+    for (var i = casesArr.length - 1; i >= 1; i--) {
+        for (var j = i - 1; j >= 0; j--) {
+            casesArrSum[i] += casesArrSum[j];
+            deathsArrSum[i] += deathsArrSum[j];
+            recoveredArrSum[i] += recoveredArrSum[j];
+        }
+    }
+}
 
 function updateData() {
     chart.data.labels = dates;
@@ -136,8 +152,8 @@ let chart = new Chart(ctx, {
                 },
                 ticks: {
                     offset: false,
-                    //suggestedMin: 0,
-                    //suggestedMax: 35,
+                    suggestedMin: 0,
+                    suggestedMax: 50,
                     fontSize: 16,
                     fontFamily: 'Montserrat'
                 },
