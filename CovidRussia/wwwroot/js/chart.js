@@ -2,20 +2,15 @@ let casesArr = [];
 let deathsArr = [];
 let recoveredArr = [];
 let regions;
-let labels = [];
+let dates = [];
 let regionName = "";
 
-$(document).ready(function () {               //get ID
+$(document).ready(function () {
     $('path').click(function () {
         getRegionStats($(this).attr('id'));
         updateData();
     });
 });
-// document.getElementById().addEventListener("click", function () {
-//     // addData(newData1);
-//     // addData(newData2);
-//     // addData(newData3);
-// });
 
 function receiveJsonData(regs) {
     regions = regs;
@@ -25,7 +20,7 @@ function getRegionStats(id) {
     casesArr = [];
     deathsArr = [];
     recoveredArr = [];
-    labels = [];
+    dates = [];
     for (var i = 0; i < regions.length; i++) {
         if (regions[i].Id == id) {
             regionName = regions[i].Name;
@@ -33,17 +28,17 @@ function getRegionStats(id) {
                 casesArr.push(regions[i].DailyStats[j].NewCases);
                 deathsArr.push(regions[i].DailyStats[j].NewDeaths);
                 recoveredArr.push(regions[i].DailyStats[j].NewRecovered);
-                labels.push(regions[i].DailyStats[j].Date);
+                let date = new Date(regions[i].DailyStats[j].Date);
+                let dateStr = date.toLocaleString('default', { month: 'long' }) + " " + date.getDate();
+                dates.push(dateStr);
             }
         }
     }
-    console.log(id);
-    console.log(casesArr);
 }
 
 
 function updateData() {
-    chart.data.labels = labels;
+    chart.data.labels = dates;
     chart.options.title.text = regionName;
     chart.data.datasets[0].data = casesArr;
     chart.data.datasets[1].data = deathsArr;
@@ -89,7 +84,7 @@ let deaths = {
     data: deathsArr,
 };
 let addCanvas = {
-    labels: labels,
+    labels: dates,
     datasets: [cases, recovered, deaths]
 };
 
@@ -141,8 +136,8 @@ let chart = new Chart(ctx, {
                 },
                 ticks: {
                     offset: false,
-                    suggestedMin: 0,
-                    suggestedMax: 35,
+                    //suggestedMin: 0,
+                    //suggestedMax: 35,
                     fontSize: 16,
                     fontFamily: 'Montserrat'
                 },

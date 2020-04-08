@@ -25,70 +25,17 @@ namespace CovidRussia.Controllers
 
         public IActionResult Index()
         {
-            var regions = new List<Region>();
-            var region = new Region
-            {
-                Id = 0,
-                Name = "Region name",
-                IsLockedDown = false,
-                DailyStats = new List<DailyStat>
-                {
-                    new DailyStat
-                    {
-                        RegionId = 0,
-                        Id = 0,
-                        Date = DateTime.Now,
-                        NewCases = 4,
-                        NewDeaths = 2,
-                        NewRecovered = 1
-                    },
-                    new DailyStat
-                    {
-                        RegionId = 0,
-                        Id = 1,
-                        Date = DateTime.Today,
-                        NewCases = 5,
-                        NewDeaths = 3,
-                        NewRecovered = 0
-                    }
-                }
-            };
-            var region1 = new Region
-            {
-                Id = 1,
-                Name = "Region name1",
-                IsLockedDown = false,
-                DailyStats = new List<DailyStat>
-                {
-                    new DailyStat
-                    {
-                        RegionId = 1,
-                        Id = 0,
-                        Date = DateTime.Now,
-                        NewCases = 2,
-                        NewDeaths = 1,
-                        NewRecovered = 1
-                    },
-                    new DailyStat
-                    {
-                        RegionId = 1,
-                        Id = 1,
-                        Date = DateTime.Today,
-                        NewCases = 7,
-                        NewDeaths = 2,
-                        NewRecovered = 2
-                    }
-                }
-            };
-            regions.Add(region);
-            regions.Add(region1);
-
-            var regs = _context.Regions
+            var regions = _context.Regions
                 .Include(r => r.DailyStats)
                 .ToList();
 
+            foreach(Region region in regions) // sorting by date
+            {
+                region.DailyStats = region.DailyStats.OrderBy(d => d.Date).ToList();
+            }
+
             var model = new JsonStatsModel();
-            model.JsonString = JsonConvert.SerializeObject(regs, Formatting.None,
+            model.JsonString = JsonConvert.SerializeObject(regions, Formatting.None,
                         new JsonSerializerSettings()
                         {
                             ReferenceLoopHandling = ReferenceLoopHandling.Ignore
