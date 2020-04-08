@@ -127,7 +127,7 @@ namespace CovidRussia.DataConversion
             //File.WriteAllText(writePath, text);
 
             Regex idRegex = new Regex(@"\d*");
-            int num = 0, id;
+            int id;
             sr = new StreamReader(@"C:\Users\danii\source\repos\Sandbox\Sandbox\AllDataFiles\TextData\all_regions_list.txt", System.Text.Encoding.Default);
             while ((line = sr.ReadLine()) != null) // reading one line
             {
