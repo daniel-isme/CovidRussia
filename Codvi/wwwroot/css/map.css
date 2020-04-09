@@ -1,0 +1,127 @@
+#svgContainer {
+    background-color: #A0A0A0;
+    position: absolute;
+    /*overflow-y: hidden;*/
+    overflow: hidden;
+    outline: 3px solid black;
+    height: 600px;
+    width: 1000px;
+    left: 50%;
+    top: 380px;
+    transform: translate(-50%, -50%);
+    z-index: 99999;
+}
+
+#map {
+    /*background-color: #2196F3;*/
+    /*cursor: grab;*/
+    display: block;
+    position: inherit;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    transition: .1s;
+    transform: scale(1.4);
+}
+
+#info {
+    position: absolute;
+    height: auto;
+    width: auto;
+    border: 2px solid darkviolet;
+    /*background-color: #2196F3;*/
+    display: none;
+    z-index: 999999;
+}
+
+#map path {
+    position: inherit;
+    fill: #333333;
+    stroke: green;
+    stroke-width: .3px;
+}
+
+
+    #map path:hover {
+        fill: green;
+        /*transform:scale(1.01);*/
+    }
+
+.zoom {
+    position: absolute;
+    height: 600px;
+    width: 1000px;
+    left: 50%;
+    top: 380px;
+    transform: translate(-50%, -50%);
+}
+
+#zoomMinus {
+    outline: none;
+    background-color: #A0A0A0;
+    font-size: 160%;
+    border: 4px;
+    border-radius: 2px;
+    position: inherit;
+    right: -4%;
+    top: 48%;
+    height: 30px;
+    width: 30px;
+}
+
+    #zoomMinus:active {
+        background-color: dimgrey;
+        transform: scale(1.05);
+    }
+
+
+#zoomPlus {
+    outline: none;
+    background-color: #A0A0A0;
+    font-size: 160%;
+    /*font-weight: bolder;*/
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    right: -4%;
+    top: 42%;
+    border: 4px;
+    border-radius: 2px;
+}
+
+    #zoomPlus:active {
+        background-color: dimgrey;
+        transform: scale(1.05);
+    }
+
+#lupa {
+    user-select: none;
+    outline: none;
+    position: inherit;
+    height: 4.5%;
+    width: 2.8%;
+    left: 0;
+    top: 0;
+    z-index: 10001;
+    transition: 0.5ms;
+    transform: scale(-1, 1)
+}
+
+#inputSearch {
+    left: -1.5px;
+    top: -2px;
+    outline: none;
+    position: inherit;
+    height: 5%;
+    width: 30%;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+    border-radius: 0 20px 20px 0;
+    display: none;
+    z-index: 10000;
+    background-color: darkseagreen;
+}
