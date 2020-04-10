@@ -5,17 +5,29 @@ document.addEventListener("mousemove", function (e) {
     inf.style.top = (e.pageY + 15) + 'px';
 });
 
+
 let Id;
 $(document).ready(function () {
     $('path').mouseover(function () {
+        inf.style.display = 'block';
         Id = $(this).attr('id');
-        displayInfo(Id);
+        displayInfo(getRegionName(Id));
         $('path').mouseout(function () {
             inf.style.display = 'none';
         });
     });
 });
-inf.innerText = "infected";
-function displayInfo(Id) {
+
+
+function getRegionName(id) {
+    for (var i = 0; i < regions.length; i++) {
+        if (regions[i].Id == id) {
+            return regions[i].Name;
+        }
+    }
+}
+
+function displayInfo(regionName) {
     inf.style.display = 'block';
+    inf.innerText = regionName;
 }

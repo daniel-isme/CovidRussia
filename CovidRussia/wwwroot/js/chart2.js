@@ -1,5 +1,5 @@
 ﻿
-let casesArr = [];
+/*let casesArr = [];
 let deathsArr = [];
 let recoveredArr = [];
 let casesArrSum = [];
@@ -7,7 +7,7 @@ let deathsArrSum = [];
 let recoveredArrSum = [];
 let regions;
 let dates = [];
-let regionName = "";
+let regionName = "";*/
 
 $(document).ready(function () {
     $('path').click(function () {
@@ -55,63 +55,48 @@ function sumStats() {
 }
 
 function updateData() {
-    chart.data.labels = dates;
-    chart.options.title.text = regionName;
-    chart.data.datasets[0].data = casesArr;
-    chart.data.datasets[1].data = deathsArr;
-    chart.data.datasets[2].data = recoveredArr;
-    chart.update();
+    chart2.data.labels = dates;
+    chart2.options.title.text = regionName;
+    chart2.data.datasets[0].data = casesArr;
+    chart2.data.datasets[1].data = deathsArr;
+    chart2.data.datasets[2].data = recoveredArr;
+    chart2.update();
 }
 
+    let ctx2 = document.getElementById('myChart2').getContext('2d');
 
-let chartColors = { //obj colors
-    white: 'rgb(255,255,255)',
-    grey: 'rgb(180,180,180)',
-    yellow: 'rgb(255,252,1)',
-    green: 'rgb(0,251,26)',
-    darkgreen: 'rgb(0,191,26)',
-    dodgerblue: 'rgb(5,161,220)',
-    blue: 'rgb(2,1,255)',
-    red: 'rgb(254,0,0)',
-    darkred: 'rgb(204,0,0)',
-    darkviolet: 'rgb(255,0,232)',
-    darkmagenta: 'rgb(165,23,151)',
-    darkmagenta2: 'rgb(125,23,151)',
-    black: "rgb(0,0,0)"
-};
 
-let ctx = document.getElementById('myChart').getContext('2d');
 
-let cases = {
+/*let cases = {
     label: 'Подтвержденных случаев',
-    borderColor: chartColors.red,
-    pointBackgroundColor: chartColors.darkred,
-    pointBorderColor: chartColors.darkred,
+    borderColor: chart2Colors.red,
+    pointBackgroundColor: chart2Colors.darkred,
+    pointBorderColor: chart2Colors.darkred,
     pointBorderWidth: 5,
     data: casesArr,
 };
 let recovered = {
     label: 'Выздоровело',
-    borderColor: chartColors.green,
-    pointBackgroundColor: chartColors.darkgreen,
-    pointBorderColor: chartColors.darkgreen,
+    borderColor: chart2Colors.green,
+    pointBackgroundColor: chart2Colors.darkgreen,
+    pointBorderColor: chart2Colors.darkgreen,
     pointBorderWidth: 5,
     data: recoveredArr,
 };
 let deaths = {
     label: 'Летальных исходов',
-    borderColor: chartColors.darkmagenta,
-    pointBackgroundColor: chartColors.darkmagenta2,
-    pointBorderColor: chartColors.darkmagenta2,
+    borderColor: chart2Colors.darkmagenta,
+    pointBackgroundColor: chart2Colors.darkmagenta2,
+    pointBorderColor: chart2Colors.darkmagenta2,
     pointBorderWidth: 5,
     data: deathsArr,
 };
 let addCanvas = {
     labels: dates,
     datasets: [cases, recovered, deaths]
-};
+};*/
 
-let chart = new Chart(ctx, {
+let chart2 = new Chart(ctx2, {
     type: 'line',
     data: addCanvas,
     options: {
@@ -144,7 +129,7 @@ let chart = new Chart(ctx, {
                     fontColor: chartColors.white,
                     fontSize: 16,
                     fontFamily: 'Roboto',
-                    
+
                 },
                 gridLines: {
                     drawBorder: true,

@@ -62,14 +62,19 @@ svgObj.onmouseleave = function () {
     document.body.style.overflow = "auto";
 };
 
+/*$('path').mousedown(function () {
+    document.getElementById("info").style.display = 'none';
+});
+$('path').mouseup(function () {
+    document.getElementById("info").style.display = 'block';
+    document.getElementById("map").style.cursor = "default";
+});*/
+
 
 function move() {
     svgContainer.addEventListener("mousedown", function (e) { // DRAG'n'DROP
-            startPoint = {x: e.x, y: e.y};
-            $('path').mousedown(function () {
-                document.getElementById("info").style.display = 'none';
-                document.getElementById("map").style.cursor = 'grabbing';
-            });
+        startPoint = { x: e.x, y: e.y };
+        svgObj.style.cursor = 'grabbing';
             svgContainer.onmousemove = function (e) {
                 endPoint = {x: e.x, y: e.y};
                 let dx = ((startPoint.x - endPoint.x) / scale) / 2;
@@ -79,22 +84,19 @@ function move() {
                     svgObj.setAttribute('viewBox', `${movedViewBox.x} ${movedViewBox.y} ${movedViewBox.w} ${movedViewBox.h}`);
                 }
             };
-            svgContainer.onmouseup = function (e) {
+        svgContainer.onmouseup = function (e) {
                 svgContainer.onmousemove = null;
-                $('path').mouseup(function () {
-                    document.getElementById("info").style.display = 'block';
-                    document.getElementById("map").style.cursor = "default";
-                });
                 endPoint = {x: e.x, y: e.y};
                 let dx = ((startPoint.x - endPoint.x) / scale) / 2;
                 let dy = ((startPoint.y - endPoint.y) / scale) / 2;
                 viewBox = {x: viewBox.x + dx, y: viewBox.y + dy, w: viewBox.w, h: viewBox.h};
                 svgContainer.onmouseup = null;
+                svgObj.style.cursor = "default"
             };
 
             svgContainer.onmouseleave = function () {
                 document.getElementById("info").style.display = 'none';
-                document.getElementById("map").style.cursor = "default";
+                svgObj.style.cursor = "default";
                 svgContainer.onmousemove = null;
             };
         }
