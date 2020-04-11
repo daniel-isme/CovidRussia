@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29920.165
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodviAuth", "CodviAuth\CodviAuth.csproj", "{C1D7616A-8BE4-4F9F-B1BA-6D2F5A61513A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C1D7616A-8BE4-4F9F-B1BA-6D2F5A61513A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1D7616A-8BE4-4F9F-B1BA-6D2F5A61513A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1D7616A-8BE4-4F9F-B1BA-6D2F5A61513A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1D7616A-8BE4-4F9F-B1BA-6D2F5A61513A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {533862CA-BDBD-4AC3-810A-C74C861AFE3A}
+	EndGlobalSection
+EndGlobal

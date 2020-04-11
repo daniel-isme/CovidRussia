@@ -1,0 +1,9 @@
+@import "switch.css";
+@import "map.css";
+@import "chart.css";
+
+body {
+    height: 100%;
+    background-color: #333333;
+    overflow: auto;
+}

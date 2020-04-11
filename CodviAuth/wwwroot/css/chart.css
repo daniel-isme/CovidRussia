@@ -1,0 +1,43 @@
+@font-face {
+    font-family: Roboto;
+    src: url('//fonts.googleapis.com/css?family=Roboto:400,700');
+}
+.chart {
+    position: absolute;
+    outline: hidden;
+    height: 500px;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 800px;
+    /*transform: translate(-50%, -50%);*/
+}
+
+.chart#myChart {
+    outline: hidden;
+    position: inherit;
+    display: block;
+    height: 100%;
+    width: 100%;
+    font-family: 'Roboto';
+}
+
+.chart2 {
+    position: absolute;
+    outline: hidden;
+    height: 500px;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 1300px;
+    /*transform: translate(-50%, -50%);*/
+}
+
+.chart#myChart2 {
+    outline: hidden;
+    position: inherit;
+    display: block;
+    height: 100%;
+    width: 100%;
+    font-family: 'Roboto';
+}
