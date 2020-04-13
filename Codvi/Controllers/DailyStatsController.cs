@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Codvi.Data;
 using Codvi.Models;
-using Codvi.Models.ViewModels;
 
 namespace Codvi.Controllers
 {
@@ -83,7 +82,7 @@ namespace Codvi.Controllers
             }
 
             this.ViewBag.Region = region;
-            return this.View(new DailyStatCreateModel());
+            return this.View(new DailyStat());
         }
 
         // POST: DailyStats/Create
@@ -91,7 +90,7 @@ namespace Codvi.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Int32? regionId, DailyStatCreateModel model)
+        public async Task<IActionResult> Create(Int32? regionId, DailyStat model)
         {
             if (regionId == null)
             {
@@ -142,7 +141,7 @@ namespace Codvi.Controllers
                 return this.NotFound();
             }
 
-            var model = new DailyStatEditModel
+            var model = new DailyStat
             {
                 Date = stat.Date,
                 NewCases = stat.NewCases,
@@ -159,7 +158,7 @@ namespace Codvi.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, DailyStatEditModel model)
+        public async Task<IActionResult> Edit(int? id, DailyStat model)
         {
             if (id == null)
             {

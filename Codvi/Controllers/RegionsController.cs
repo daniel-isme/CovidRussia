@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Codvi.Data;
 using Codvi.Models;
-using Codvi.Models.ViewModels;
 
 namespace Codvi.Controllers
 {
@@ -47,7 +46,7 @@ namespace Codvi.Controllers
         // GET: Regions/Create
         public IActionResult Create()
         {
-            return View(new RegionCreateModel());
+            return View(new Region());
         }
 
         // POST: Regions/Create
@@ -55,7 +54,7 @@ namespace Codvi.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(RegionCreateModel model)
+        public async Task<IActionResult> Create(Region model)
         {
             if (this.ModelState.IsValid)
             {
@@ -88,7 +87,7 @@ namespace Codvi.Controllers
                 return NotFound();
             }
 
-            var model = new RegionEditModel
+            var model = new Region
             {
                 Name = region.Name,
                 IsLockedDown = region.IsLockedDown
@@ -102,7 +101,7 @@ namespace Codvi.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, RegionEditModel model)
+        public async Task<IActionResult> Edit(int? id, Region model)
         {
             if (id == null)
             {
