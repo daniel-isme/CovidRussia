@@ -1,7 +1,0 @@
-@import "switch.css";
-@import "map.css";
-@import "chart.css";
-body {
-    background-color: #333333;
-    overflow: auto;
-}
