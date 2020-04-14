@@ -21,3 +21,10 @@
     width: 100%;
     font-family: 'Roboto';
 }
+
+.stats-type-select {
+    z-index: 999999;
+    position: absolute;
+    left: 81%;
+    top: 770px;
+}

@@ -8,8 +8,8 @@ document.addEventListener("mousemove", function (e) {
 let Id;
 $(document).ready(function () {
     $('path').mouseover(function () {
-        Id = $(this).attr('id');
-        displayInfo(getRegionName(Id));
+        regionId = $(this).attr('id');
+        displayInfo(getRegionName(regionId));
         $('path').mouseout(function () {
             inf.style.display = 'none';
         });

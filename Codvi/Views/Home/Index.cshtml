@@ -215,7 +215,14 @@
     </script>
 </div>
 
-<button onclick="setRussiaStats()" type="button" class="btn btn-light" id="button_russia">Россия</button>
+<button onclick="setRussiaId()" type="button" class="btn btn-light" id="button_russia">Россия</button>
+
+<div class="form-group stats-type-select">
+    <select onclick="setStats()" class="form-control" id="statsType">
+        <option value="total">Всего случаев</option>
+        <option value="new">Новые случаи</option>
+    </select>
+</div>
 
 <script src="~/js/zoomDragndrop.js"></script>
 

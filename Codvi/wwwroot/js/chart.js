@@ -7,67 +7,63 @@ let recoveredArrSum = [];
 let regions;
 let dates = [];
 let regionName = "";
+let regionId = 0;
+let statsType;
 
 $(document).ready(function () {
     $('path').click(function () {
-        getRegionStats($(this).attr('id'));
-        updateData();
+        regionId = $(this).attr('id');
+        setStats();
     });
 });
 
-window.onload = function () {  setRussiaStats() }
+window.onload = function () {  setStats() }
 
 function receiveJsonData(regs) {
     regions = regs;
 }
 
-function setRussiaStats() {
+function setStats() {
+    statsType = document.getElementById("statsType").value;
+    console.log(statsType);
+
     let statLength = regions[0].DailyStats.length;
     casesArr = zeroIntArray(statLength);
     deathsArr = zeroIntArray(statLength);
     recoveredArr = zeroIntArray(statLength);
     dates = initDates();
-    regionName = "Россия";
 
     for (var i = 0; i < regions.length; i++) {
-        for (var j = 0; j < statLength; j++) {
-            casesArr[j] += regions[i].DailyStats[j].NewCases;
-            deathsArr[j] += regions[i].DailyStats[j].NewDeaths;
-            recovered[j] += regions[i].DailyStats[j].NewRecovered;
+        if (regions[i].Id == regionId || regionId == 0) { // if id == 0 (russia) - sum all of reg stats
+            regionName = regions[i].Name;
+            for (var j = 0; j < statLength; j++) {
+                casesArr[j] += regions[i].DailyStats[j].NewCases;
+                deathsArr[j] += regions[i].DailyStats[j].NewDeaths;
+                recovered[j] += regions[i].DailyStats[j].NewRecovered;
+            }
         }
+    }
+
+    if (regionId == 0) regionName = "Россия";
+
+    if (statsType == "total") {
+        sumStats();
     }
 
     updateData();
 }
 
-function getRegionStats(id) {
-    let statLength = regions[0].DailyStats.length;
-    casesArr = zeroIntArray(statLength);
-    deathsArr = zeroIntArray(statLength);
-    recoveredArr = zeroIntArray(statLength);
-    dates = initDates();
-    for (var i = 0; i < regions.length; i++) {
-        if (regions[i].Id == id) {
-            regionName = regions[i].Name;
-            for (var j = 0; j < statLength; j++) {
-                casesArr[j] = regions[i].DailyStats[j].NewCases;
-                deathsArr[j] = regions[i].DailyStats[j].NewDeaths;
-                recovered[j] = regions[i].DailyStats[j].NewRecovered;
-            }
-        }
-    }
-    //sumStats();
+function setRussiaId() {
+    regionId = 0;
+    setStats();
 }
 
 function sumStats() {
-    casesArrSum = casesArr.slice();
-    deathsArrSum = deathsArr.slice();
-    recoveredArrSum = recoveredArr.slice();
     for (var i = casesArr.length - 1; i >= 1; i--) {
         for (var j = i - 1; j >= 0; j--) {
-            casesArrSum[i] += casesArrSum[j];
-            deathsArrSum[i] += deathsArrSum[j];
-            recoveredArrSum[i] += recoveredArrSum[j];
+            casesArr[i] += casesArr[j];
+            deathsArr[i] += deathsArr[j];
+            recoveredArr[i] += recoveredArr[j];
         }
     }
 }
@@ -165,7 +161,7 @@ let chart = new Chart(ctx, {
         title: {
             fontColor: chartColors.white,
             display: true,
-            text: 'Статистика короновируса по всей России',
+            text: 'Россия',
             fontSize: 20,
             fontFamily: 'Roboto'
         },
@@ -192,7 +188,7 @@ let chart = new Chart(ctx, {
                 ticks: {
                     offset: false,
                     suggestedMin: 0,
-                    suggestedMax: 50,
+                    suggestedMax: 25,
                     fontSize: 16,
                     fontFamily: 'Roboto',
                     fontColor: chartColors.white
