@@ -4,7 +4,6 @@
     ViewData["Title"] = "Home Page";
 }
 
-<h2>Home</h2>
 
 <meta charset="UTF-8" />
 <title>COVIDRussia</title>
@@ -213,13 +212,7 @@
     <script src="~/js/chart.js">
     </script>
 </div>
-<div class="chart2">
-    <canvas id="myChart2"></canvas>
-    <script src="~/js/chart2.js">
-    </script>
-</div>
 <script src="~/js/zoomDragndrop.js"></script>
-
 <script>
     receiveJsonData(@Html.Raw(Model.JsonString));
 </script>
