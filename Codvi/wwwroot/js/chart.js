@@ -1,4 +1,3 @@
-
 let casesArr = [];
 let deathsArr = [];
 let recoveredArr = [];
@@ -16,35 +15,54 @@ $(document).ready(function () {
     });
 });
 
+window.onload = function () {  setRussiaStats() }
+
 function receiveJsonData(regs) {
     regions = regs;
 }
 
+function setRussiaStats() {
+    let statLength = regions[0].DailyStats.length;
+    casesArr = zeroIntArray(statLength);
+    deathsArr = zeroIntArray(statLength);
+    recoveredArr = zeroIntArray(statLength);
+    dates = initDates();
+    regionName = "Россия";
+
+    for (var i = 0; i < regions.length; i++) {
+        for (var j = 0; j < statLength; j++) {
+            casesArr[j] += regions[i].DailyStats[j].NewCases;
+            deathsArr[j] += regions[i].DailyStats[j].NewDeaths;
+            recovered[j] += regions[i].DailyStats[j].NewRecovered;
+        }
+    }
+
+    updateData();
+}
+
 function getRegionStats(id) {
-    casesArr = [];
-    deathsArr = [];
-    recoveredArr = [];
-    dates = [];
+    let statLength = regions[0].DailyStats.length;
+    casesArr = zeroIntArray(statLength);
+    deathsArr = zeroIntArray(statLength);
+    recoveredArr = zeroIntArray(statLength);
+    dates = initDates();
     for (var i = 0; i < regions.length; i++) {
         if (regions[i].Id == id) {
             regionName = regions[i].Name;
-            for (var j = 0; j < regions[i].DailyStats.length; j++) {
-                casesArr.push(regions[i].DailyStats[j].NewCases);
-                deathsArr.push(regions[i].DailyStats[j].NewDeaths);
-                recoveredArr.push(regions[i].DailyStats[j].NewRecovered);
-                let date = new Date(regions[i].DailyStats[j].Date);
-                let dateStr = date.toLocaleString('default', { month: 'long' }) + " " + date.getDate();
-                dates.push(dateStr);
+            for (var j = 0; j < statLength; j++) {
+                casesArr[j] = regions[i].DailyStats[j].NewCases;
+                deathsArr[j] = regions[i].DailyStats[j].NewDeaths;
+                recovered[j] = regions[i].DailyStats[j].NewRecovered;
             }
         }
     }
-    sumStats();
+    //sumStats();
 }
 
 function sumStats() {
-    casesArrSum = casesArr;
-    deathsArrSum = deathsArr;
-    recoveredArrSum = recoveredArr;
+    casesArrSum = casesArr.slice();
+    deathsArrSum = deathsArr.slice();
+    recoveredArrSum = recoveredArr.slice();
     for (var i = casesArr.length - 1; i >= 1; i--) {
         for (var j = i - 1; j >= 0; j--) {
             casesArrSum[i] += casesArrSum[j];
@@ -63,6 +81,19 @@ function updateData() {
     chart.update();
 }
 
+function zeroIntArray(length) {
+    return Array.from(new Array(length), (x) => 0);
+}
+
+function initDates() {
+    newDates = [];
+    for (var i = 0; i < regions[0].DailyStats.length; i++) {
+        let date = new Date(regions[0].DailyStats[i].Date);
+        let dateStr = date.toLocaleString('default', { month: 'long' }) + " " + date.getDate();
+        newDates.push(dateStr);
+    }
+    return newDates;
+}
 
 let chartColors = { //obj colors
     white: 'rgb(255,255,255)',

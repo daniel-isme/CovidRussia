@@ -21,23 +21,3 @@
     width: 100%;
     font-family: 'Roboto';
 }
-
-.chart2 {
-    position: absolute;
-    outline: hidden;
-    height: 500px;
-    width: 100%;
-    left: 0;
-    right: 0;
-    top: 1300px;
-    /*transform: translate(-50%, -50%);*/
-}
-
-.chart#myChart2 {
-    outline: hidden;
-    position: inherit;
-    display: block;
-    height: 100%;
-    width: 100%;
-    font-family: 'Roboto';
-}

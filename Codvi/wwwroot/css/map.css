@@ -106,3 +106,10 @@
     background-color: dimgrey;
     transform: scale(1.05);
 }
+
+#button_russia {
+    z-index: 999999;
+    position: absolute;
+    left: 70%;
+    top: 750px;
+}
