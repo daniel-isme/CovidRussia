@@ -5,11 +5,9 @@ document.addEventListener("mousemove", function (e) {
     inf.style.top = (e.pageY + 15) + 'px';
 });
 
-let Id;
 $(document).ready(function () {
     $('path').mouseover(function () {
-        regionId = $(this).attr('id');
-        displayInfo(getRegionName(regionId));
+        displayInfo(getRegionName($(this).attr('id')));
         $('path').mouseout(function () {
             inf.style.display = 'none';
         });
