@@ -49,9 +49,7 @@ function zoomMinus(e) {
     let dy = dh / 2;
     viewBox = {x: viewBox.x, y: viewBox.y + (-dy), w: viewBox.w, h: viewBox.h - (-dh)};
     svgObj.setAttribute('viewBox', `${viewBox.x} ${viewBox.y} ${viewBox.w} ${viewBox.h}`);
-
 }
-
 
 svgContainer.onmousewheel = function (e) { // ZOOM
     document.body.style.overflow = "hidden";
@@ -62,20 +60,11 @@ svgObj.onmouseleave = function () {
     document.body.style.overflow = "auto";
 };
 
-/*$('path').mousedown(function () {
-    document.getElementById("info").style.display = 'none';
-});
-$('path').mouseup(function () {
-    document.getElementById("info").style.display = 'block';
-    document.getElementById("map").style.cursor = "default";
-});*/
-
-
 function move() {
     svgContainer.addEventListener("mousedown", function (e) { // DRAG'n'DROP
             startPoint = { x: e.x, y: e.y };
-            svgObj.style.cursor = 'grabbing';
             svgContainer.onmousemove = function (e) {
+                svgObj.style.cursor = 'grabbing';
                 endPoint = {x: e.x, y: e.y};
                 let dx = ((startPoint.x - endPoint.x) / scale) / 2;
                 let dy = ((startPoint.y - endPoint.y) / scale) / 2;
@@ -98,9 +87,22 @@ function move() {
                 document.getElementById("info").style.display = 'none';
                 svgObj.style.cursor = "default";
                 svgContainer.onmousemove = null;
+                document.body.style.overflow = 'auto';
             };
         }
     )
 }
 
 move();
+
+window.addEventListener("resize", function () {
+    if (window.innerWidth < 1700) {
+        svgContainer.style.width = 80 + '%';
+        $('.zoom').css({'width': '80%'});
+    }
+
+    if (window.innerWidth > 1700) {
+        svgContainer.style.width = 1500 + 'px';
+        $('.zoom').css({'width': '1500px'});
+    }
+});

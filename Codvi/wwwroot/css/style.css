@@ -2,7 +2,13 @@
 @import "map.css";
 @import "chart.css";
 body {
-    height: 100%;
     background-color: #333333;
+    display: block;
     overflow: auto;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+::-webkit-scrollbar:hover {
+    display: block;
 }
