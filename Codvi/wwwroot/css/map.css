@@ -105,11 +105,11 @@
 #button_russia {
     background-color: #4e555b;
     color: white;
-    border: solid black 2px;
+    border: solid black 1px;
     z-index: 99990;
     position: absolute;
     left: 1%;
     bottom: 2%;
-    font-size: 20px;
+    font-size: 130%;
     font-family: Roboto;
 }

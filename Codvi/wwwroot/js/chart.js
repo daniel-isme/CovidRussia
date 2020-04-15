@@ -25,7 +25,6 @@ function receiveJsonData(regs) {
 
 function setStats() {
     statsType = document.getElementById("statsType").value;
-    console.log(statsType);
 
     let statLength = regions[0].DailyStats.length;
     casesArr = zeroIntArray(statLength);

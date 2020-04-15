@@ -98,11 +98,13 @@ move();
 window.addEventListener("resize", function () {
     if (window.innerWidth < 1700) {
         svgContainer.style.width = 80 + '%';
+        // svgContainer.style.height = 80 + '%';
         $('.zoom').css({'width': '80%'});
     }
 
     if (window.innerWidth > 1700) {
         svgContainer.style.width = 1500 + 'px';
+        // svgContainer.style.height = 700 + 'px';
         $('.zoom').css({'width': '1500px'});
     }
 });
