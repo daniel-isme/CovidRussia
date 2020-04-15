@@ -18,9 +18,13 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow mb-3" style="background-color: #171a1d;">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow mb-3" style="background-color: #171a1d; -webkit-box-shadow: 0px 8px 11px 0px rgba(156,156,156,1);
+                                                                                                                                 -moz-box-shadow: 0px 8px 11px 0px rgba(156,156,156,1);
+                                                                                                                                 box-shadow: 0px 8px 11px 0px rgba(156,156,156,1); padding: -10px;">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="font-size: 30px">Codvi</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="font-size: 30px; color: #1c7430; text-shadow: black 1px 1px 0, black 2px 2px 0, 
+                                                                                                                                                    black 3px 3px 0, black 4px 4px 0, 
+                                                                                                                                                    black 5px 5px 0;">Codvi</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -36,9 +40,9 @@
                         <li class="nav-link">
                             <a class="nav-justified text-white" href="https://ria.ru/category_koronavirus-v-rossii/">Новости</a>
                         </li>
-                        <li class="nav-link">
-                            <a class="nav-justified text-white" asp-area="" asp-controller="Regions" asp-action="Index">Regions(удалить перед релизом)</a>
-                        </li>
+                        @* <li class="nav-link"> *@
+                        @*     <a class="nav-justified text-white" asp-area="" asp-controller="Regions" asp-action="Index">Regions(удалить перед релизом)</a> *@
+                        @* </li> *@
 
                     </ul>
                 </div>
