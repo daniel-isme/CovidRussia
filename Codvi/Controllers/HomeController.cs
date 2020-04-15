@@ -32,7 +32,7 @@ namespace Codvi.Controllers
                 .Include(r => r.DailyStats)
                 .ToList();
 
-            foreach (Region region in regions) // sorting by date
+            foreach (Region region in regions) // sort by date
             {
                 region.DailyStats = region.DailyStats.OrderBy(d => d.Date).ToList();
             }

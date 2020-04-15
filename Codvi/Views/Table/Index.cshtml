@@ -1,0 +1,46 @@
+﻿@model List<RegionTable>
+@{
+    ViewData["Title"] = "Таблица";
+}
+
+<h1>Таблица</h1>
+<h5>Последнее обновление @ViewData["LastUpdate"]</h5>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Область
+            </th>
+            <th>
+                Случаи заболевания
+            </th>
+            <th>
+                Выздоровевших
+            </th>
+            <th>
+                Смертей
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegionName)
+                </td>
+                <td>
+                    @(Html.DisplayFor(modelItem => item.Cases)) (+@(Html.DisplayFor(modelItem => item.LastCases)))
+                </td>
+                <td>
+                    @(Html.DisplayFor(modelItem => item.Deaths)) (+@(Html.DisplayFor(modelItem => item.LastDeaths)))
+                </td>
+                <td>
+                    @(Html.DisplayFor(modelItem => item.Recovered)) (+@(Html.DisplayFor(modelItem => item.LastRecovered)))
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
