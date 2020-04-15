@@ -34,4 +34,5 @@
     font-size: 130%;
     border: solid black 1px;
     font-family: Roboto;
+    cursor: pointer;
 }

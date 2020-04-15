@@ -161,7 +161,7 @@ let chart = new Chart(ctx, {
             fontColor: chartColors.white,
             display: true,
             text: 'Россия',
-            fontSize: 20,
+            fontSize: 35,
             fontFamily: 'Roboto'
         },
         scales: {
