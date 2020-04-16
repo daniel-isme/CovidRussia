@@ -60,8 +60,8 @@ namespace Codvi.DataConversion
                         {
                             Date = DateTime.ParseExact(stat[0], "dd.MM.yyyy", CultureInfo.InvariantCulture),
                             Cases = int.Parse(stat[1]),
-                            Deaths = int.Parse(stat[2]),
-                            Recovered = int.Parse(stat[3])
+                            Deaths = int.Parse(stat[3]),
+                            Recovered = int.Parse(stat[2])
                         });
                 }
                 else
@@ -75,8 +75,8 @@ namespace Codvi.DataConversion
                             {
                                 Date = DateTime.ParseExact(stat[0], "dd.MM.yyyy", CultureInfo.InvariantCulture),
                                 Cases = int.Parse(stat[1]),
-                                Deaths = int.Parse(stat[2]),
-                                Recovered = int.Parse(stat[3])
+                                Deaths = int.Parse(stat[3]),
+                                Recovered = int.Parse(stat[2])
                             }
                         }
                     });

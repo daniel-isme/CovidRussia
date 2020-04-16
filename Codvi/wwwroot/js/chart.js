@@ -39,7 +39,7 @@ function setStats() {
             for (var j = 0; j < statLength; j++) {
                 casesArr[j] += regions[i].DailyStats[j].NewCases;
                 deathsArr[j] += regions[i].DailyStats[j].NewDeaths;
-                recovered[j] += regions[i].DailyStats[j].NewRecovered;
+                recoveredArr[j] += regions[i].DailyStats[j].NewRecovered;
             }
         }
     }
@@ -72,8 +72,8 @@ function updateData() {
     chart.data.labels = dates;
     chart.options.title.text = regionName;
     chart.data.datasets[0].data = casesArr;
-    chart.data.datasets[1].data = deathsArr;
-    chart.data.datasets[2].data = recoveredArr;
+    chart.data.datasets[1].data = recoveredArr;
+    chart.data.datasets[2].data = deathsArr;
     chart.update();
 }
 
