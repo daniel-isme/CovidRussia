@@ -1,9 +1,6 @@
 let casesArr = [];
 let deathsArr = [];
 let recoveredArr = [];
-let casesArrSum = [];
-let deathsArrSum = [];
-let recoveredArrSum = [];
 let regions;
 let dates = [];
 let regionName = "";
@@ -13,7 +10,7 @@ let check = 0;
 
 $(document).ready(function () {
     $('path').click(function () {
-        if(check !== 0) document.getElementById(regionId).style.fill = '#333333';
+        if (check !== 0) document.getElementById(regionId).style.fill = '#333333';
         regionId = $(this).attr('id');
         check++;
         setStats();
@@ -23,7 +20,6 @@ $(document).ready(function () {
 
 window.onload = function () {
     setStats();
-    selection(regionId);
 };
 
 function selection(regionId) {
@@ -35,6 +31,7 @@ function receiveJsonData(regs) {
 }
 
 function setStats() {
+    console.log(regionId);
     statsType = document.getElementById("statsType").value;
 
     let statLength = regions[0].DailyStats.length;
@@ -64,13 +61,11 @@ function setStats() {
 }
 
 function setRussiaId() {
+    document.getElementById(regionId).style.fill = '#333333';
     regionId = 0;
     setStats();
+    check = 0;
 }
-
-document.getElementById('button_russia').onclick = function() {
-    document.getElementById(regionId).style.fill = '#333333';
-};
 
 function sumStats() {
     for (var i = casesArr.length - 1; i >= 1; i--) {
