@@ -52,33 +52,33 @@ namespace Codvi.DataConversion
                     }
                 }
 
+                var newStat = new StatLocal
+                {
+                    Date = DateTime.ParseExact(stat[0], "dd.MM.yyyy", CultureInfo.InvariantCulture),
+                    Cases = int.Parse(stat[1]),
+                    Deaths = int.Parse(stat[3]),
+                    Recovered = int.Parse(stat[2])
+                };
+
+                if (newStat.Date <= DateTime.ParseExact("04.04.2020", "dd.MM.yyyy", CultureInfo.InvariantCulture))
+                {
+                    var tmp = newStat.Deaths;
+                    newStat.Deaths = newStat.Recovered;
+                    newStat.Recovered = tmp;
+                }
+
                 if (regionExist)
                 {
                     regions.First(i => i.Name == regName)
                         .Stats
-                        .Add(new StatLocal
-                        {
-                            Date = DateTime.ParseExact(stat[0], "dd.MM.yyyy", CultureInfo.InvariantCulture),
-                            Cases = int.Parse(stat[1]),
-                            Deaths = int.Parse(stat[3]),
-                            Recovered = int.Parse(stat[2])
-                        });
+                        .Add(newStat);
                 }
                 else
                 {
                     regions.Add(new RegLocal
                     {
                         Name = regName,
-                        Stats = new List<StatLocal>
-                        {
-                            new StatLocal
-                            {
-                                Date = DateTime.ParseExact(stat[0], "dd.MM.yyyy", CultureInfo.InvariantCulture),
-                                Cases = int.Parse(stat[1]),
-                                Deaths = int.Parse(stat[3]),
-                                Recovered = int.Parse(stat[2])
-                            }
-                        }
+                        Stats = new List<StatLocal> { newStat }
                     });
                 }
             }

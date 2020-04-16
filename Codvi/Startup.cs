@@ -27,7 +27,9 @@ namespace Codvi
         {
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(
+                    this.Configuration.GetConnectionString("DefaultConnection"),
+                    providerOptions => providerOptions.EnableRetryOnFailure()));
 
             services.AddControllersWithViews();
         }
@@ -35,11 +37,11 @@ namespace Codvi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            //using (var context = scope.ServiceProvider.GetService<ApplicationDbContext>())
-            //{
-            //    context.Database.Migrate();
-            //}
+            using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            using (var context = scope.ServiceProvider.GetService<ApplicationDbContext>())
+            {
+                context.Database.Migrate();
+            }
 
             if (env.IsDevelopment())
             {

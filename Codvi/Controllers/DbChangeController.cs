@@ -26,6 +26,8 @@ namespace Codvi.Controllers
             return View();
         }
 
+        public string folder = @"C:\Users\danii\Source\Repos\CovidRussia\Codvi\AllDataFiles\TextData\";
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Index(StartPageAction action)
@@ -34,17 +36,16 @@ namespace Codvi.Controllers
             {
                 case StartPageAction.Init:
 
-                    //initData();
+                    initData();
                     ViewData["Action"] = "Init";
                     break;
 
                 case StartPageAction.Update:
 
                     ViewData["Action"] = "Update";
-                    var folder = @"C:\Users\danii\Source\Repos\CovidRussia\Codvi\AllDataFiles\TextData\";
-                    Cleaner.ClearRawText(
-                        readPath: folder + @"raw_text_data.txt",
-                        writePath: folder + @"cleared_raw.txt");
+                    //Cleaner.ClearRawText(
+                    //    readPath: folder + @"raw_text_data.txt",
+                    //    writePath: folder + @"cleared_raw.txt");
 
                     var regionsLocal = StatNormalizer.Normalize(
                         readPath: folder + @"cleared_raw.txt",
@@ -121,7 +122,7 @@ namespace Codvi.Controllers
 
         private void initData()
         {
-            string readPath = @"C:\Users\danii\source\repos\CovidRussia\CovidRussia\AllDataFiles\TextData\all_regions_list.txt";
+            string readPath = folder + @"all_regions_list.txt";
             string line;
             Regex idRegex = new Regex(@"\d*");
             Regex regionRegex = new Regex(@"[А-Я].*");
@@ -141,7 +142,7 @@ namespace Codvi.Controllers
                 _context.Regions.Add(region);
 
                 DateTime from = DateTime.Parse("1/31/2020 12:00:00 AM");
-                DateTime thru = DateTime.Parse("4/4/2020 12:00:00 AM");
+                DateTime thru = DateTime.Parse("4/16/2020 12:00:00 AM");
                 for (var day = from.Date; day.Date <= thru.Date; day = day.AddDays(1))
                 {
                     var stat = new DailyStat
