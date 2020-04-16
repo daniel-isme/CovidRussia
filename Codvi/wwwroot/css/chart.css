@@ -31,7 +31,8 @@
 #statsType {
     background-color: #4e555b;
     color: white;
-    font-size: 20px;
-    border: solid black 2px;
+    font-size: 130%;
+    border: solid black 1px;
     font-family: Roboto;
+    cursor: pointer;
 }
