@@ -9,6 +9,6 @@ namespace Codvi.Models
     {
         Init,
         Update,
-        Map
+        InsertNewDays
     }
 }

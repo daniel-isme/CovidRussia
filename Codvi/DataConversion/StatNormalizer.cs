@@ -70,15 +70,15 @@ namespace Codvi.DataConversion
                     {
                         Name = regName,
                         Stats = new List<StatLocal>
-                    {
-                        new StatLocal
                         {
-                            Date = DateTime.ParseExact(stat[0], "dd.MM.yyyy", CultureInfo.InvariantCulture),
-                            Cases = int.Parse(stat[1]),
-                            Deaths = int.Parse(stat[2]),
-                            Recovered = int.Parse(stat[3])
+                            new StatLocal
+                            {
+                                Date = DateTime.ParseExact(stat[0], "dd.MM.yyyy", CultureInfo.InvariantCulture),
+                                Cases = int.Parse(stat[1]),
+                                Deaths = int.Parse(stat[2]),
+                                Recovered = int.Parse(stat[3])
+                            }
                         }
-                    }
                     });
                 }
             }
