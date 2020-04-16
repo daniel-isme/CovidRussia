@@ -9,15 +9,26 @@ let dates = [];
 let regionName = "";
 let regionId = 0;
 let statsType;
+let check = 0;
 
 $(document).ready(function () {
     $('path').click(function () {
+        if(check !== 0) document.getElementById(regionId).style.fill = '#333333';
         regionId = $(this).attr('id');
+        check++;
         setStats();
+        selection(regionId);
     });
 });
 
-window.onload = function () {  setStats() }
+window.onload = function () {
+    setStats();
+    selection(regionId);
+};
+
+function selection(regionId) {
+    document.getElementById(regionId).style.fill = 'black';
+}
 
 function receiveJsonData(regs) {
     regions = regs;
@@ -57,6 +68,10 @@ function setRussiaId() {
     setStats();
 }
 
+document.getElementById('button_russia').onclick = function() {
+    document.getElementById(regionId).style.fill = '#333333';
+};
+
 function sumStats() {
     for (var i = casesArr.length - 1; i >= 1; i--) {
         for (var j = i - 1; j >= 0; j--) {
@@ -84,7 +99,7 @@ function initDates() {
     newDates = [];
     for (var i = 0; i < regions[0].DailyStats.length; i++) {
         let date = new Date(regions[0].DailyStats[i].Date);
-        let dateStr = date.toLocaleString('default', { month: 'long' }) + " " + date.getDate();
+        let dateStr = date.toLocaleString('default', {month: 'long'}) + " " + date.getDate();
         newDates.push(dateStr);
     }
     return newDates;

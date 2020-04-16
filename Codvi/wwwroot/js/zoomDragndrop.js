@@ -112,3 +112,5 @@ window.addEventListener("resize", function () {
         $('.zoom').css({'width': '1500px'});
     }
 });
+
+

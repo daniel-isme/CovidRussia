@@ -56,6 +56,9 @@
     fill: green;
     transition: .2s;
 }
+#map path:focus {
+    fill: black;
+}
 
 #button_russia {
     background-color: #4e555b;
