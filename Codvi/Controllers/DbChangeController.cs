@@ -107,7 +107,7 @@ namespace Codvi.Controllers
                         continue;
                     }
                     var stat = _context.DailyStats.SingleOrDefault(s => s.Date == statLocal.Date && s.RegionId == regLocal.Id);
-                    if (stat != null && stat.NewCases == 0 && stat.NewDeaths == 0 && stat.NewRecovered == 0)
+                    if (stat != null && stat.NewCases == 0 && stat.NewDeaths == 0 && stat.NewRecovered == 0 && stat.Date != DateTime.Parse("4/3/2020 12:00:00 AM"))
                     {
                         stat.NewCases = statLocal.Cases;
                         stat.NewDeaths = statLocal.Deaths;
@@ -141,8 +141,8 @@ namespace Codvi.Controllers
 
                 _context.Regions.Add(region);
 
-                DateTime from = DateTime.Parse("1/31/2020 12:00:00 AM");
-                DateTime thru = DateTime.Parse("4/16/2020 12:00:00 AM");
+                DateTime from = DateTime.Parse("4/17/2020 12:00:00 AM");
+                DateTime thru = DateTime.Parse("5/21/2020 12:00:00 AM");
                 for (var day = from.Date; day.Date <= thru.Date; day = day.AddDays(1))
                 {
                     var stat = new DailyStat

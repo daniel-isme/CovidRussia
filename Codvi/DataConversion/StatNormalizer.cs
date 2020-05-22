@@ -86,15 +86,28 @@ namespace Codvi.DataConversion
             // sum to delta
             foreach (RegLocal region in regions)
             {
-                for (int i = region.Stats.Count - 1; i > 0; i--)
+                region.Stats = region.Stats.OrderByDescending(s => s.Date).ToList();
+
+                for (int i = 0; i < region.Stats.Count - 1; i++)
                 {
-                    for (int j = i - 1; j >= 0; j--)
-                    {
-                        region.Stats[j].Cases -= region.Stats[i].Cases;
-                        region.Stats[j].Deaths -= region.Stats[i].Deaths;
-                        region.Stats[j].Recovered -= region.Stats[i].Recovered;
-                    }
+                    region.Stats[i].Cases -= region.Stats[i + 1].Cases;
+                    region.Stats[i].Deaths -= region.Stats[i + 1].Deaths;
+                    region.Stats[i].Recovered -= region.Stats[i + 1].Recovered;
+
+                    if (region.Stats[i].Cases < 0) region.Stats[i].Cases = 0;
+                    if (region.Stats[i].Deaths < 0) region.Stats[i].Deaths = 0;
+                    if (region.Stats[i].Recovered < 0) region.Stats[i].Recovered = 0;
                 }
+
+                //for (int i = region.Stats.Count - 1; i > 0; i--)
+                //{
+                //    for (int j = i - 1; j >= 0; j--)
+                //    {
+                //        region.Stats[j].Cases -= region.Stats[i].Cases;
+                //        region.Stats[j].Deaths -= region.Stats[i].Deaths;
+                //        region.Stats[j].Recovered -= region.Stats[i].Recovered;
+                //    }
+                //}
             }
 
             // remove all zero stats
