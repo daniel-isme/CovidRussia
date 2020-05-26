@@ -2,6 +2,7 @@
     font-family: Roboto;
     src: url('//fonts.googleapis.com/css?family=Roboto:400,700');
 }
+
 .chart {
     position: absolute;
     outline: hidden;
@@ -12,14 +13,14 @@
     top: 950px;
 }
 
-.chart#myChart {
-    outline: hidden;
-    position: inherit;
-    display: block;
-    height: 100%;
-    width: 100%;
-    font-family: 'Roboto';
-}
+    .chart#myChart {
+        outline: hidden;
+        position: inherit;
+        display: block;
+        height: 100%;
+        width: 100%;
+        font-family: 'Roboto';
+    }
 
 .stats-type-select {
     position: absolute;
@@ -28,8 +29,9 @@
     border-radius: 10px;
     font-family: Roboto;
 }
+
 #statsType {
-    background-color: #4e555b;
+    background-color: mediumseagreen;
     color: white;
     font-size: 130%;
     border: solid black 1px;

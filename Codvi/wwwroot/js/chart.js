@@ -10,7 +10,7 @@ let check = 0;
 
 $(document).ready(function () {
     $('path').click(function () {
-        if (check !== 0) document.getElementById(regionId).style.fill = '#333333';
+        // if (check !== 0) document.getElementById(regionId).style.fill = '#333333';
         regionId = $(this).attr('id');
         check++;
         setStats();
@@ -18,12 +18,12 @@ $(document).ready(function () {
     });
 });
 
-window.onload = function () {
-    setStats();
-};
+//window.onload = function () { see zzoomDragndrop
+//    setStats();
+//};
 
 function selection(regionId) {
-    document.getElementById(regionId).style.fill = 'black';
+    // document.getElementById(regionId).style.fill = 'green';
 }
 
 function receiveJsonData(regs) {
@@ -31,7 +31,7 @@ function receiveJsonData(regs) {
 }
 
 function setStats() {
-    console.log(regionId);
+    console.log("set stats");
     statsType = document.getElementById("statsType").value;
 
     let statLength = regions[0].DailyStats.length;
@@ -61,7 +61,9 @@ function setStats() {
 }
 
 function setRussiaId() {
-    document.getElementById(regionId).style.fill = '#333333';
+    if (regionId != 0) {
+        document.getElementById(regionId).style.fill = '#333333';
+    }
     regionId = 0;
     setStats();
     check = 0;
@@ -94,7 +96,7 @@ function initDates() {
     newDates = [];
     for (var i = 0; i < regions[0].DailyStats.length; i++) {
         let date = new Date(regions[0].DailyStats[i].Date);
-        let dateStr = date.toLocaleString('default', {month: 'long'}) + " " + date.getDate();
+        let dateStr = date.toLocaleString('default', { month: 'long' }) + " " + date.getDate();
         newDates.push(dateStr);
     }
     return newDates;
@@ -102,7 +104,7 @@ function initDates() {
 
 let chartColors = { //obj colors
     white: 'rgb(255,255,255)',
-    grey: 'rgb(180,180,180)',
+    grey: 'rgb(145, 145, 145)',
     yellow: 'rgb(255,252,1)',
     green: 'rgb(0,251,26)',
     darkgreen: 'rgb(0,191,26)',
@@ -123,7 +125,7 @@ let cases = {
     borderColor: chartColors.red,
     pointBackgroundColor: chartColors.darkred,
     pointBorderColor: chartColors.darkred,
-    pointBorderWidth: 5,
+    pointBorderWidth: 3,
     data: casesArr,
 };
 let recovered = {
@@ -131,7 +133,7 @@ let recovered = {
     borderColor: chartColors.green,
     pointBackgroundColor: chartColors.darkgreen,
     pointBorderColor: chartColors.darkgreen,
-    pointBorderWidth: 5,
+    pointBorderWidth: 3,
     data: recoveredArr,
 };
 let deaths = {
@@ -139,7 +141,7 @@ let deaths = {
     borderColor: chartColors.darkmagenta,
     pointBackgroundColor: chartColors.darkmagenta2,
     pointBorderColor: chartColors.darkmagenta2,
-    pointBorderWidth: 5,
+    pointBorderWidth: 3,
     data: deathsArr,
 };
 let addCanvas = {
@@ -156,9 +158,9 @@ let chart = new Chart(ctx, {
         stacked: false,
         legend: {
             labels: {
-                fontColor: chartColors.white,
+                fontColor: chartColors.black,
                 boxWidth: 30,
-                fontSize: 18,
+                fontSize: 25,
                 fontFamily: 'Roboto',
             }
         },
@@ -168,7 +170,7 @@ let chart = new Chart(ctx, {
             }
         },
         title: {
-            fontColor: chartColors.white,
+            fontColor: chartColors.black,
             display: true,
             text: 'Россия',
             fontSize: 35,
@@ -177,7 +179,7 @@ let chart = new Chart(ctx, {
         scales: {
             xAxes: [{
                 ticks: {
-                    fontColor: chartColors.white,
+                    fontColor: chartColors.black,
                     fontSize: 16,
                     fontFamily: 'Roboto',
 
@@ -185,8 +187,8 @@ let chart = new Chart(ctx, {
                 gridLines: {
                     drawBorder: true,
                     display: true,
-                    color: chartColors.dodgerblue,
-                    lineWidth: 0.8
+                    color: chartColors.grey,
+                    lineWidth: 1
                 }
             },
             ],
@@ -200,20 +202,19 @@ let chart = new Chart(ctx, {
                     suggestedMax: 25,
                     fontSize: 16,
                     fontFamily: 'Roboto',
-                    fontColor: chartColors.white
+                    fontColor: chartColors.black
                 },
                 gridLines: {
                     drawBorder: true,
                     display: true,
-                    color: chartColors.dodgerblue,
-                    lineWidth: 0.8
+                    color: chartColors.grey,
+                    lineWidth: 1
                 },
             }
             ],
         }
     }
 });
-
 
 
 

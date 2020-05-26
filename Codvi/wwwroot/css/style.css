@@ -1,14 +1,13 @@
 @import "switch.css";
 @import "map.css";
 @import "chart.css";
+
 body {
-    background-color: #333333;
+    background-color: white;
     display: block;
     overflow: auto;
 }
+
 ::-webkit-scrollbar {
     display: none;
-}
-::-webkit-scrollbar:hover {
-    display: block;
 }
