@@ -43,9 +43,9 @@ namespace Codvi.Controllers
                 case StartPageAction.Update:
 
                     ViewData["Action"] = "Update";
-                    //Cleaner.ClearRawText(
-                    //    readPath: folder + @"raw_text_data.txt",
-                    //    writePath: folder + @"cleared_raw.txt");
+                    Cleaner.ClearRawText(
+                        readPath: folder + @"raw_text_data.txt",
+                        writePath: folder + @"cleared_raw.txt");
 
                     var regionsLocal = StatNormalizer.Normalize(
                         readPath: folder + @"cleared_raw.txt",
