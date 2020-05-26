@@ -30,7 +30,24 @@
     font-family: Roboto;
 }
 
+.stats-time-select {
+    position: absolute;
+    right: 10%;
+    top: 0;
+    border-radius: 10px;
+    font-family: Roboto;
+}
+
 #statsType {
+    background-color: mediumseagreen;
+    color: white;
+    font-size: 130%;
+    border: solid black 1px;
+    font-family: Roboto;
+    cursor: pointer;
+}
+
+#statsTime {
     background-color: mediumseagreen;
     color: white;
     font-size: 130%;

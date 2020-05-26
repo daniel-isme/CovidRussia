@@ -18,7 +18,7 @@ $(document).ready(function () {
     });
 });
 
-//window.onload = function () { see zzoomDragndrop
+//window.onload = function () { see zoomDragndrop
 //    setStats();
 //};
 
@@ -31,8 +31,8 @@ function receiveJsonData(regs) {
 }
 
 function setStats() {
-    console.log("set stats");
     statsType = document.getElementById("statsType").value;
+    statsTime = document.getElementById("statsTime").value;
 
     let statLength = regions[0].DailyStats.length;
     casesArr = zeroIntArray(statLength);
@@ -55,6 +55,13 @@ function setStats() {
 
     if (statsType == "total") {
         sumStats();
+    }
+
+    if (statsTime == "last_month") {
+        casesArr = casesArr.slice(statLength - 31, statLength);
+        deathsArr = deathsArr.slice(statLength - 31, statLength);
+        recoveredArr = recoveredArr.slice(statLength - 31, statLength);
+        dates = dates.slice(statLength - 31, statLength);
     }
 
     updateData();
