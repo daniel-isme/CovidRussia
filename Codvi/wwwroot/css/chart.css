@@ -4,13 +4,10 @@
 }
 
 .chart {
-    position: absolute;
     outline: hidden;
-    height: 700px;
+    height: 550px;
     width: 100%;
-    left: 0;
-    right: 0;
-    top: 950px;
+    margin-bottom: 100px;
 }
 
     .chart#myChart {
@@ -21,22 +18,6 @@
         width: 100%;
         font-family: 'Roboto';
     }
-
-.stats-type-select {
-    position: absolute;
-    right: 1%;
-    top: 0;
-    border-radius: 10px;
-    font-family: Roboto;
-}
-
-.stats-time-select {
-    position: absolute;
-    right: 10%;
-    top: 0;
-    border-radius: 10px;
-    font-family: Roboto;
-}
 
 #statsType {
     background-color: mediumseagreen;

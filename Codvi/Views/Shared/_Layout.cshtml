@@ -4,23 +4,20 @@
     <meta charset="utf-8" />
     <title>@ViewData["Title"] - Codvi</title>
 
-    <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    </environment>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
 </head>
 <body>
     <header>
         <!-- Yandex.Metrika counter -->
         <script type="text/javascript">
             (function (m, e, t, r, i, k, a) {
-            m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+                m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
                 m[i].l = 1 * new Date(); k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
             })
                 (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
@@ -34,33 +31,45 @@
         <noscript><div><img src="https://mc.yandex.ru/watch/64379716" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
         <!-- /Yandex.Metrika counter -->
 
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow mb-3" style="background-color: #171a1d; box-shadow: black 0 3px 2px; z-index: 999999">
-            <div class="container-fluid">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+            <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="color: mediumseagreen; text-shadow: black 2px 2px 2px; font-size: 30px;">Codvi</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1" style="font-size: 130%; font-family: Roboto; top: 10%; position: inherit;">
-                        <li class="nav-link">
-                            <a class="nav-justified text-white" asp-area="" asp-controller="Home" asp-action="Index">Главная</a>
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Главная</a>
                         </li>
-                        <li class="nav-link">
-                            <a class="nav-justified text-white" asp-area="" asp-controller="Table" asp-action="Index">Таблица</a>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Table" asp-action="Index">Таблица</a>
                         </li>
-                        <li class="nav-link">
-                            <a class="nav-justified text-white" href="https://ria.ru/category_koronavirus-v-rossii/">Новости</a>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="https://ria.ru/category_koronavirus-v-rossii/">Новости</a>
                         </li>
-                        <li class="nav-link">
-                            <a class="nav-justified text-white" href="https://ria.ru/category_koronavirus-v-rossii/">Рекомендации</a>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="https://ria.ru/category_koronavirus-v-rossii/">Рекомендации</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
+
+    <footer class="border-top footer bg-dark text-muted">
+        <div class="container">
+            &copy; 2020 - Codvi - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js">
     </script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
