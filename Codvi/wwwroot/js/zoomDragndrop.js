@@ -22,7 +22,7 @@ window.onload = () => {
         map.style.top = 0 + 'px'
         leftStop = 0
         topStop = 0
-        $(map).css("transform", "scale(1) scaleY(1.4) translateY(-55%)")
+        $(map).css("transform", "scale(1) scaleY(1.4)")
     })
 
     svgContainer.onmouseover = () => {
@@ -45,7 +45,7 @@ window.onload = () => {
 
     function zooming(koef) {
         scale *= koef;
-        $(map).css("transform", "scale(" + scale + ") scaleY(1.4) translateY(-55%)");
+        $(map).css("transform", "scale(" + scale + ") scaleY(1.4) ");
     }
 
     let leftStop = 0

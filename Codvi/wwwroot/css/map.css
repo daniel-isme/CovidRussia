@@ -4,6 +4,8 @@
 }
 
 #svgContainer {
+    display: flex;
+    justify-content: center;
     position: relative;
     overflow: hidden;
     outline: none;
@@ -19,14 +21,12 @@
 
 
 #map {
-    display: block;
-    justify-content: center;
+    display: flex;
+    align-items: center;
     position: relative;
     height: 100%;
     width: 100%;
-    top: 0;
-    left: 0;
-    transform: scale(1) scaleY(1.4) translateY(-55%);
+    transform: scale(1) scaleY(1.4);
 }
 
 #info {
