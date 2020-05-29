@@ -27,17 +27,11 @@
     <div class="row">
         <div id="svgContainer">
             <div id="mapButtonsBlock">
-                <div class="row">
                     <img id="zoomPlus" class="mapButton" src="~/images/outline_add_white_18dp.png" title="Увеличить масштаб" />
-                </div>
-                <div class="row">
                     <button id="returnMapButton" class="mapButton" title="Вернуть карту в исходное положение">
                         <img style="width: 15px; height: 15px; text-align:center" src="~/images/baseline_fiber_manual_record_white_18dp.png" />
                     </button>
-                </div>
-                <div class="row">
                     <img id="zoomMinus" class="mapButton" src="~/images/outline_remove_white_18dp.png" title="Уменьшить масштаб" />
-                </div>
             </div>
 
             <div id="map">
@@ -54,7 +48,7 @@
             <div class="row" style="top: 50px;">
                 <div class="col-xl-8 col-lg-6 col-md-4 col-sm-4"></div>
                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-7">
-                    <select onclick="setStats()" class="form-control" id="statsType">
+                    <select onchange="setStats()" class="form-control" id="statsType">
                         <option value="total">Всего случаев</option>
                         <option value="new">Новые случаи</option>
                     </select>
@@ -76,4 +70,3 @@
     <script>
         receiveJsonData(@Html.Raw(Model.JsonString));
     </script>
-</div>

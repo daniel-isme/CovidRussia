@@ -6,8 +6,7 @@ window.onload = () => {
     let buttonZoomMinus = document.getElementById("zoomMinus")
     let svgContainer = document.getElementById("svgContainer");
     let returnMap = document.getElementById("returnMapButton");
-    let map = document.getElementById("map")
-
+    let map = document.getElementById("map");
 
 
     buttonZoomMinus.addEventListener("click", () => {
@@ -23,17 +22,18 @@ window.onload = () => {
         map.style.top = 0 + 'px'
         leftStop = 0
         topStop = 0
+        $(map).css("transform", "scale(1) scaleY(1.4) translateY(-55%)")
     })
 
     svgContainer.onmouseover = () => {
         $("body").css("overflow", "hidden");
-        document.body.style.cursor = 'grab'
+        document.body.style.cursor = 'default'
         svgContainer.onwheel = (e) => {
             //zoom(e)
-            if (e.deltaY < 0 && (scale > 0.5)) {
+            if (e.deltaY > 0 && (scale > 0.5)) {
                 zooming(0.9);
             }
-            if ((e.deltaY > 0) && (scale < 4.4)) {
+            if ((e.deltaY < 0) && (scale < 4.4)) {
                 zooming(1.1);
             }
         }
@@ -45,7 +45,7 @@ window.onload = () => {
 
     function zooming(koef) {
         scale *= koef;
-        $(map).css("transform", "scale(" + scale + ") scaleY(1.4)");
+        $(map).css("transform", "scale(" + scale + ") scaleY(1.4) translateY(-55%)");
     }
 
     let leftStop = 0
@@ -58,11 +58,11 @@ window.onload = () => {
         let leftStart = Number(e.clientX) - Number(leftStop)
         let topStart = Number(e.clientY) - Number(topStop)
         map.onmousemove = (e) => {
-            map.style.left = -(leftStart - e.clientX) + 'px'
+            map.style.left = -(leftStart - e.clientX) +  'px'
             map.style.top = -(topStart - e.clientY) + 'px'
         }
         map.addEventListener("mouseup", () => {
-            document.body.style.cursor = "grab"
+            document.body.style.cursor = "default"
             leftStop = map.style.left.replace('px', '')
             topStop = map.style.top.replace('px', '')
             map.onmousemove = null

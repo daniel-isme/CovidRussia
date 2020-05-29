@@ -4,7 +4,7 @@
 }
 
 #svgContainer {
-    background-color: white;
+    position: relative;
     overflow: hidden;
     outline: none;
     width: 100%;
@@ -12,20 +12,21 @@
     -webkit-transition: background-color 0.5s;
 }
 
-    #svgContainer:hover {
-        background-color: #e2e3e5;
-        -webkit-transition: background-color 0.5s;
-    }
+#svgContainer:hover {
+    background-color: #e2e3e5;
+    -webkit-transition: background-color 0.5s;
+}
 
 
 #map {
     display: block;
+    justify-content: center;
     position: relative;
     height: 100%;
     width: 100%;
     top: 0;
     left: 0;
-    transform: scale(1) scaleY(1.4);
+    transform: scale(1) scaleY(1.4) translateY(-55%);
 }
 
 #info {
@@ -53,16 +54,16 @@
 }
 
 
-    #map path:hover {
-        fill: green;
-        -webkit-transition: fill 0.2s;
-    }
+#map path:hover {
+    fill: green;
+    -webkit-transition: fill 0.2s;
+}
 
 #button_russia {
     left: 1%;
     bottom: 55px;
     position: relative;
-    z-index: 999999;
+    z-index: 9999999;
     background-color: mediumseagreen;
     color: white;
     border: solid black 1px;
@@ -71,15 +72,19 @@
 }
 
 #mapButtonsBlock {
-    top: 1%;
-    left: 2.5%;
-    position: relative;
+    left: 20%;
+    outline: hidden;
+    width: 35px;
+    display: flex;
     z-index: 999999;
+    flex-direction: column;
 }
 
 .mapButton {
+    z-index: 999999999;
     cursor: pointer;
-    margin-top: 4px;
+    margin-top: 7px;
+    margin-left: 10px;
     border-radius: 5px;
     background-color: mediumseagreen;
     border: solid black 1px;
@@ -87,8 +92,9 @@
     height: 35px;
     width: 35px;
 }
-    .mapButton:active {
-        height: 35px;
-        width: 35px;
-        background-color: #343a40;
-    }
+
+.mapButton:active {
+    height: 35px;
+    width: 35px;
+    background-color: #343a40;
+}
