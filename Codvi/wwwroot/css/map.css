@@ -4,6 +4,8 @@
 }
 
 #svgContainer {
+    border-radius: 5px;
+    border: 1px solid #e2e3e5;
     display: flex;
     justify-content: center;
     position: relative;
@@ -26,7 +28,7 @@
     position: relative;
     height: 100%;
     width: 100%;
-    transform: scale(1) scaleY(1.4);
+    transform: scale(1) scaleY(1.4) translateX(-15px);
 }
 
 #info {

@@ -25,7 +25,7 @@ window.onload = () => {
         leftStop = 0
         topStop = 0
         scale = 1;
-        $(map).css("transform", "scale(1) scaleY(1.4)")
+        mapApplyScale(scale);
     })
 
     svgContainer.onmouseover = () => {
@@ -48,12 +48,12 @@ window.onload = () => {
 
     function zooming(koef) {
         scale *= koef;
-        $(map).css("transform", "scale(" + scale + ") scaleY(1.4) ");
+        mapApplyScale(scale);
     }
 
     function zoomPlus(k) {
         scale += k
-        $(map).css("transform", "scale(" + scale + ") scaleY(1.4)")
+        mapApplyScale(scale);
     }
 
     let leftStop = 0
@@ -108,16 +108,17 @@ window.onload = () => {
                 var y2 = e.touches[1].clientY;
                 distance2 = Math.hypot(x2 - x1, y2 - y1);
                 var delta = distance2 - distance1;
-                var deltaMax = 1;
+                var deltaAbs = Math.abs(delta);
+                var deltaMax = 100;
                 var deltaMin = 0.01;
 
-                if (Math.abs(delta) > deltaMin && Math.abs(delta) < deltaMax) {
+                if (deltaAbs > deltaMin && deltaAbs < deltaMax) {
                     if (scale >= minScale && scale <= maxScale) {
-                        zoomPlus(delta * 0.1);
-                    } else if (scale > maxScale) {
-                        scale = maxScale;
-                    } else if (scale < minScale) {
-                        scale = minScale;
+                        zoomPlus(delta * 0.01);
+                    } else if (scale > maxScale && delta < 0) {
+                        zoomPlus(delta * 0.01);
+                    } else if (scale < minScale && delta > 0) {
+                        zoomPlus(delta * 0.01);
                     }
                 }
 
@@ -138,6 +139,9 @@ window.onload = () => {
     }
 }
 
+function mapApplyScale (scale) {
+    $(map).css("transform", "scale(" + scale + ") scaleY(1.4) translateX(-15px)");
+}
 
 var $objHead = $('head');
 
