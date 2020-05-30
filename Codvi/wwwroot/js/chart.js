@@ -128,7 +128,7 @@ let chartColors = { //obj colors
 let ctx = document.getElementById('myChart').getContext('2d');
 
 let cases = {
-    label: 'Подтвержденных случаев',
+    label: 'Активные случаи',
     borderColor: chartColors.red,
     pointBackgroundColor: chartColors.darkred,
     pointBorderColor: chartColors.darkred,
@@ -144,7 +144,7 @@ let recovered = {
     data: recoveredArr,
 };
 let deaths = {
-    label: 'Летальных исходов',
+    label: 'Летальные исходы',
     borderColor: chartColors.darkmagenta,
     pointBackgroundColor: chartColors.darkmagenta2,
     pointBorderColor: chartColors.darkmagenta2,
