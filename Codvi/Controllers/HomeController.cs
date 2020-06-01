@@ -43,7 +43,12 @@ namespace Codvi.Controllers
             return View(model);
         }
 
-        public IActionResult Privacy()
+        public IActionResult ContactUs()
+        {
+            return View();
+        }
+
+        public IActionResult Donation()
         {
             return View();
         }
