@@ -42,7 +42,7 @@ namespace Codvi.Controllers
 
                 case StartPageAction.Update:
 
-                    ViewData["Action"] = "Update";
+                    ViewData["Action"] = "Update Info";
                     Cleaner.ClearRawText(
                         readPath: folder + @"raw_text_data.txt",
                         writePath: folder + @"cleared_raw.txt");

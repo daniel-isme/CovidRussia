@@ -22,6 +22,7 @@ namespace Codvi.DataConversion
                 Regex dateRegex = new Regex(@"\d+");
                 Regex rawDateRegexApr = new Regex(@"в России на \d* апр");
                 Regex rawDateRegexMay = new Regex(@"в России на \d* ма");
+                Regex rawDateRegexJun = new Regex(@"в России на \d* июн");
                 Regex statRegex = new Regex(@"[А-Я].*[/] *\d* *[/] *\d*");
 
                 while ((line = sr.ReadLine()) != null) // reading one line
@@ -30,6 +31,8 @@ namespace Codvi.DataConversion
 
                     Match matchApr = rawDateRegexApr.Match(line);
                     Match matchMay = rawDateRegexMay.Match(line);
+                    Match matchJun = rawDateRegexJun.Match(line);
+
                     if (matchApr.Success)
                     {
                         var dayMatch = dateRegex.Match(matchApr.Value);
@@ -56,6 +59,21 @@ namespace Codvi.DataConversion
                                 day = "0" + day;
                             }
                             date = $"{day}.05.2020";
+                            continue;
+                        }
+                    }
+
+                    if (matchJun.Success)
+                    {
+                        var dayMatch = dateRegex.Match(matchJun.Value);
+                        if (dayMatch.Success)
+                        {
+                            var day = dayMatch.Value;
+                            if (day.Length == 1)
+                            {
+                                day = "0" + day;
+                            }
+                            date = $"{day}.06.2020";
                             continue;
                         }
                     }
