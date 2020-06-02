@@ -88,7 +88,7 @@ window.onload = () => {
     // device with touches
     svgContainer.ontouchstart = (e) => {
         $("body").css("overflow", "hidden");
-        zoomPageDisable();
+        //zoomPageDisable();
 
         let leftStart = Number(e.touches[0].clientX) - Number(leftStop)
         let topStart = Number(e.touches[0].clientY) - Number(topStop)
@@ -99,40 +99,40 @@ window.onload = () => {
 
                 map.style.left = -(leftStart - e.touches[0].clientX) + 'px'
                 map.style.top = -(topStart - e.touches[0].clientY) + 'px'
-
-            } else if (e.touches.length > 1) {
-
-                var x1 = e.touches[0].clientX;
-                var x2 = e.touches[1].clientX;
-                var y1 = e.touches[0].clientY;
-                var y2 = e.touches[1].clientY;
-                distance2 = Math.hypot(x2 - x1, y2 - y1);
-                var delta = distance2 - distance1;
-                var deltaAbs = Math.abs(delta);
-                var deltaMax = 100;
-                var deltaMin = 0.01;
-
-                if (deltaAbs > deltaMin && deltaAbs < deltaMax) {
-                    if (scale >= minScale && scale <= maxScale) {
-                        zoomPlus(delta * 0.01);
-                    } else if (scale > maxScale && delta < 0) {
-                        zoomPlus(delta * 0.01);
-                    } else if (scale < minScale && delta > 0) {
-                        zoomPlus(delta * 0.01);
-                    }
-                }
-
-                distance1 = distance2;
             }
+            //} else if (e.touches.length > 1) {
+
+            //    var x1 = e.touches[0].clientX;
+            //    var x2 = e.touches[1].clientX;
+            //    var y1 = e.touches[0].clientY;
+            //    var y2 = e.touches[1].clientY;
+            //    distance2 = Math.hypot(x2 - x1, y2 - y1);
+            //    var delta = distance2 - distance1;
+            //    var deltaAbs = Math.abs(delta);
+            //    var deltaMax = 100;
+            //    var deltaMin = 0.01;
+
+            //    if (deltaAbs > deltaMin && deltaAbs < deltaMax) {
+            //        if (scale >= minScale && scale <= maxScale) {
+            //            zoomPlus(delta * 0.01);
+            //        } else if (scale > maxScale && delta < 0) {
+            //            zoomPlus(delta * 0.01);
+            //        } else if (scale < minScale && delta > 0) {
+            //            zoomPlus(delta * 0.01);
+            //        }
+            //    }
+
+            //    distance1 = distance2;
+            //}
         }
         svgContainer.addEventListener("touchend", () => {
             leftStop = map.style.left.replace('px', '')
             topStop = map.style.top.replace('px', '')
             map.onmousemove = null
             $("body").css("overflow", "auto");
-            if (e.touches.length > 1) {
-                zoomPageEnable();
-            }
+            //if (e.touches.length > 1) {
+            //    zoomPageEnable();
+            //}
             distance1 = 0;
             distance2 = 0;
         })
